@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ivankozhyn/site_builder/build",
   "devDependencies": {
     "css-loader": "^4.2.2",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.4.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
