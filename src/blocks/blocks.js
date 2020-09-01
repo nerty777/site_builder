@@ -1,4 +1,4 @@
-import { row, col } from '../utils'
+import { row, col, css } from '../utils'
 
 class Block {
   constructor(value, options = {}) {
@@ -17,31 +17,44 @@ export class Title extends Block {
   }
 
   toHTML() {
-    const { tag, styles } = this.options
+    const { tag = 'h2', styles = {} } = this.options
 
     return row(col(`<${tag}>${this.value}</${tag}>`), styles)
   }
 }
 
 export class Image extends Block {
-  constructor(value, options) {
+  constructor(value = '', options = {}) {
     super(value, options)
   }
 
   toHTML() {
-    const { alt, styles, imageStyle } = this.options
+    const {
+      alt = 'picture',
+      styles,
+      imageStyle = {
+        width: '300px',
+        height: 'auto',
+      },
+    } = this.options
+
+    const defaultRowStyle = {
+      display: 'flex',
+      'justify-content': 'center',
+      'align-items': 'center',
+    }
+
+    const rowStyles = Object.keys(styles).length ? styles : defaultRowStyle
 
     return row(
       `
         <img
-          style="${Object.entries(imageStyle)
-            .map(([key, value]) => key + ':' + value)
-            .join(';')}"
           src=${this.value}
+          style=${css(imageStyle)}
           alt=${alt}
         />
       `,
-      styles,
+      rowStyles,
     )
   }
 }
