@@ -1,12 +1,14 @@
 import './styles/main.css'
 import { model } from './model'
+import { Site } from './site/site'
+import { Sidebar } from './sidebar/sidebar'
 
-const siteHtml = () => {
-  let html = ''
-  model.forEach(block => (html += block.toHTML()))
+const site = new Site('#site')
 
-  return html
+const updateCallback = newBlock => {
+  model.push(newBlock)
+  site.render(model)
 }
 
-const site = document.querySelector('#site')
-site.insertAdjacentHTML('beforeend', siteHtml())
+new Sidebar('#sidebar', updateCallback)
+site.render(model)

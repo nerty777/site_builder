@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path')
 
 module.exports = {
@@ -11,9 +12,19 @@ module.exports = {
     port: 3000,
   },
   devtool: 'eval-cheap-source-map',
-  plugins: [new HtmlWebpackPlugin({
+  plugins: [
+    new HtmlWebpackPlugin({
     template: './src/index.html'
-  })],
+  }),
+  new CopyPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'build'),
+      },
+    ],
+  }),
+],
   module: {
     rules: [
       {
@@ -21,7 +32,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|ico)$/i,
         use: [
           {
             loader: 'file-loader',

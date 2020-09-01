@@ -1,5 +1,5 @@
 import image from './assets/love.jpg'
-import { Title, Image, TextColumns, Text } from './block/block'
+import { Title, Image, TextColumns, Text } from './blocks/blocks'
 
 export const model = [
   new Title('Site builder', {
@@ -14,17 +14,12 @@ export const model = [
     styles: {
       display: 'flex',
       'justify-content': 'center',
+      'align-items': 'center',
     },
     alt: 'love',
     imageStyle: {
       'max-height': '300px',
       'max-width': '300px',
-    },
-  }),
-  new Text('lorem1', {}),
-  new TextColumns(['text1', 'text2', 'text3'], {
-    styles: {
-      padding: '1rem',
     },
   }),
 ]
